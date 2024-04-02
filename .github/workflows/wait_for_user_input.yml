@@ -3,10 +3,6 @@ name: Custom Workflow
 on: 
   workflow_dispatch:
     inputs:
-      terraform_command:
-        description: 'Terraform command'
-        required: true
-        default: 'terraform plan'
       relative_dir_to_terraform_code:
         description: 'Relative path to terraform code'
         required: true
