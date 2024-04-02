@@ -3,14 +3,14 @@ name: Custom Workflow
 on: 
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Define env name'
+      terraform_command:
+        description: 'Terraform command'
         required: true
-        default: 'prod'
-      branch:
-        description: 'Define branch name'
+        default: 'terraform plan'
+      relative_dir_to_terraform_code:
+        description: 'Relative path to terraform code'
         required: true
-        default: 'master'
+        default: './infra/databricks/workflows/partner_affiliate_data_raw_to_bronze'
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      - name: Print environment and branch names
+      - name: Run the terraform command
         run: |
-          echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "Branch: ${{ github.event.inputs.branch }}"
+          echo "Running terraform command "
+          echo "${{ github.event.inputs.terraform_command }} ${{ github.event.inputs.relative_dir_to_terraform_code }} "
